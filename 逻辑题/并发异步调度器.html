@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<button type="button">add</button>
+	</body>
+	<script type="text/javascript">
+		function request(time) {
+			return new Promise(resolve => {
+				console.log('start', time)
+				setTimeout(() => {
+					console.log('end', time)
+					resolve()
+				}, time)
+			})
+		}
+		class Scheduler {
+			constructor() {
+				this.maxRunningLength = 2
+				this.waiting = []
+				this.running = []
+			}
+			addTask(task) {
+				if (this.running.length < this.maxRunningLength) {
+					this.running.push(task)
+				} else {
+					this.waiting.push(task)
+				}
+			}
+			start() {
+				this.running.forEach(_ => {
+					// 延时器是为了避免一开始执行到同样的run
+					setTimeout(() => {
+						this.run()
+					})
+				})
+			}
+			run() {
+				const fn = this.running.shift()
+				if (!fn) return;
+				fn().then(() => {
+					if (this.waiting.length > 0) {
+						this.running.push(this.waiting.shift())
+					} 
+					this.run()
+				})
+			}
+		}
+		const holder = new Scheduler()
+		holder.addTask(request.bind(null, 4000))
+		holder.addTask(request.bind(null, 300))
+		holder.addTask(request.bind(null, 2000))
+		holder.addTask(request.bind(null, 200))
+		holder.addTask(request.bind(null, 3000))
+		console.log(holder)
+		holder.start()
+	</script>
+</html>

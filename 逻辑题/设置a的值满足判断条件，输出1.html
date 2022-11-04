@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+
+	</body>
+	<script type="text/javascript">
+		// 设置a的值满足判断条件，输出1
+		var a = {
+			n: 0,
+			toString() {
+				return ++this.n
+			}
+		};
+		// console.log(Number(a.toString()))
+		if (a == 1 && a == 2 && a == 3) {
+			console.log(1)
+		}
+		
+		//知识点小结
+		// 1.==在比较数据时会进行隐式转化,这里利用了,对象和数字比较时,会先将对象转换为字符串,在转换为数字
+		// 2.重写对象中的toString
+	</script>
+</html>

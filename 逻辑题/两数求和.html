@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		const list = [3, 5, 36, 6, 7, 9]
+		const lead = 12
+
+		const map = {}
+		let result = []
+		list.forEach((item, index) => {
+			if (result.length) return;
+			const dif = lead - item
+			if (typeof map[dif] !== 'number') {
+				map[item] = index
+			} else {
+				result = [map[dif], index]
+			}
+
+		})
+		console.log(map, result);
+	</script>
+</html>

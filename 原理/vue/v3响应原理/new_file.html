@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<!-- <script src="./new_file.js"></script> -->
+	<script src="./fake.js"></script>
+	<script>
+		const obj = {
+			name: 'adic',
+			get value(){
+				console.log('get');
+				return name
+			},
+			set value(val){
+				console.log('set');
+				this.name = val
+			}
+		}
+		obj.value = 322
+	</script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		const aa = [3, 5, 9, 8, 4, 2, 3, 1]
+
+		function bubbleSort(arr) {
+			// 冒泡。不停拿当前和其后的大小互换
+			// let len = arr.length;
+			// for (let i = 0; i < len; i++) {
+			// 	for (let j = 0; j < len - 1 - i; j++) {
+			// 		if (arr[j] > arr[j + 1]) { //相邻元素两两对比
+			// 			[arr[j + 1], arr[j]] = [arr[j], arr[j + 1]]
+			// 		}
+			// 	}
+			// }
+			
+			// 选择。不停拿当前与当前下标之后中最小值互换
+			// let len = arr.length;
+			// let minIndex;
+			// for (let i = 0; i < len - 1; i++) {
+			// 	minIndex = i;
+			// 	for (let j = i + 1; j < len; j++) {
+			// 		if (arr[j] < arr[minIndex]) { //寻找最小的数
+			// 			minIndex = j; //将最小数的索引保存
+			// 		}
+			// 	}
+			// 	[arr[i], arr[minIndex]] = [arr[minIndex], arr[i]]
+			// }
+		}
+		console.time('start')
+		bubbleSort(aa)
+		console.timeEnd('start')
+		console.log(aa);
+	</script>
+</html>

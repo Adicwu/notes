@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+
+	</body>
+	<script type="text/javascript">
+		// css 中经常有类似 background-image 这种通过 - 连接的字符，通过 javascript 设置样式的时候需要将这种样式转换成 backgroundImage 驼峰格式，请完成此转换功能
+		// 1. 以 - 为分隔符，将第二个起的非空单词首字母转为大写
+		// 2. -webkit-border-image 转换后的结果为 webkitBorderImage
+		function cssStyle2DomStyle(sName) {
+			if (sName[0] === '-') sName = sName.replace('-', '')
+			return sName.split('-').map((item, index) => {
+				return index > 0 ? item[0].toUpperCase() + item.slice(1) : item
+			}).join('')
+		}
+		console.log(cssStyle2DomStyle('-webkit-border-image'))
+	</script>
+</html>

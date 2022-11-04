@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body></body>
+	<script type="text/javascript">
+		//求1+2+..+n，
+		//不能使用乘除法、for、while、if、else、switch、case等关键字，
+		//不能使用条件判断(x?a:b)、&&、||，
+		//不能使用es6中的遍历函数(reduce、map等)
+		function handle(n) {
+			const args = [...Array(n).keys()]
+			return eval(args.join('+')) + Number(args.slice(-1)) + 1
+			
+			// 骚方法
+			// ".".repeat(n).replace(/\./g, (_, offset) => ".".repeat(offset + 1)).length;
+			
+			// || 版本，也被禁用
+			// return Number(n === 1) || handle(n - 1) + n;
+		}
+		console.log(handle(3))
+		
+		// 考验基础知识量
+		// eval 对字符串进行运算
+		// Array.prototype.keys 将数组的下标整合 返回其数组
+		// join、slice、...等基础掌握
+	</script>
+</html>

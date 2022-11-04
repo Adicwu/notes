@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		setTimeout(function(){
+			// do something
+			console.log('??')
+			setTimeout(arguments.callee,1200)
+		},1200)
+		
+		// 知识点
+		// 1.递归
+		// 2.arguments.callee执行函数自己
+	</script>
+</html>

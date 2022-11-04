@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+
+	</body>
+	<script type="text/javascript">
+		//打印1-10000间的所有对称数，如11、111、121
+		var rel = [...Array(10000).keys()].filter((x) => {
+			return x.toString().length > 1 && x === Number(x.toString().split('').reverse().join(''))
+		})
+		console.log(rel)
+	</script>
+</html>

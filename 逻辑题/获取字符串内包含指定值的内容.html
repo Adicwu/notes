@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+
+	</body>
+	<script type="text/javascript">
+		let str = "adbcswjsbdabc";
+		let key = 'abcd'
+		
+		function findSame(str, key) {
+			const keyLen = key.length
+			const res = []
+			const strToNum = (str) => str.split('').reduce((totol, item) => {
+				totol += item.charCodeAt()
+				return totol
+			}, 0)
+			const isSameStr = (a, b) => strToNum(a) === strToNum(b)
+			for (let i = 0; i < str.length; i++) {
+				const item = str.slice(i, i + keyLen);
+				if (item.length >= keyLen && isSameStr(item, key)) {
+					res.push(item)
+				}
+			}
+			return res
+		}
+		console.log(findSame(str, key))
+	</script>
+</html>

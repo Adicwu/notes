@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+
+	</body>
+	<script type="text/javascript">
+		function deepCopy(org, cache = new WeakMap()) {
+			return cache.has(org) ? cache.get(org) : Object.entries(org).reduce((total, [k, v]) => {
+				total[k] = typeof v === 'object' ? deepCopy(v, cache) : v
+				cache.set(org, total)
+				return total
+			}, org instanceof Array ? [] : {})
+		}
+
+		// 实测
+		let obj = {
+			name: '深拷贝测试',
+			age: 19,
+			hobby: ['sing', 'sing', 'sing'],
+			info: {
+				address: '北京',
+				email: 'whgsn.bh.com'
+			},
+		}
+		let objClone = deepCopy(obj);
+		objClone.hobby[1] = 'painting'
+		obj.info.address = 'none'
+		console.log(obj, objClone) // 修改新对象的引用值后，目标原对象都没有被改变。我们实现了深拷贝！
+
+		// let obj2 = {
+		// 	name: '循环引用测试',
+		// 	list: []
+		// }
+		// obj2.cycle = obj2
+		// obj2.list[0] = obj2
+		// let objClone2 = deepCopy(obj2);
+		// console.log(obj2, objClone2)
+
+
+
+
+
+
+		// 知识点
+		// 1.利用Object.entries(obj)将obj对象的键值对应拆分为二维数组
+		// 2.利用for的of遍历数组
+		// 3.利用数组结构将for的item转换为k、v
+		// 4.函数递归深度拷贝
+		// 5.利用map来存放对象格式的缓存，来处理循环引用的问题
+
+
+		/**
+		 * 参考文章 https://jishuin.proginn.com/p/763bfbd65bed
+		 * 深克隆（深拷贝）+ 解决深拷贝函数中循环引用时导致的栈溢出的问题
+		 * @param {object} origin 
+		 * @param {*} hashMap WeakMap数据，用于缓存克隆过的对象
+		 * @returns origin / 克隆的origin
+		 */
+		// function deepCloneCycle(origin, hashMap = new WeakMap()) {
+		// 	let result = null;
+		// 	if (hashMap.has(origin)) return hashMap.get(origin); // 查缓存字典中是否已有需要克隆的对象，有的话直接返回同一个对象（同一个引用，不用递归无限创建进而导致栈溢出了）
+		// 	if (typeof origin === 'object' && origin) { // 【类型判断】引用类型，进行递归拷贝（用typeof判断类型要剔除null的情况）
+		// 		if (origin instanceof Array) {
+		// 			// 【遍历赋值】
+		// 			result = []
+		// 			hashMap.set(origin, result); // 哈希表缓存新值
+		// 			origin.forEach(el => {
+		// 				result.push(deepCloneCycle(el, hashMap)); // 【递归】
+		// 			});
+		// 		} else {
+		// 			// 【类型判断】对象类型，创建一个新对象
+		// 			result = {};
+		// 			hashMap.set(origin, result); // 哈希表缓存新值
+		// 			for (const key in origin) {
+		// 				// 【遍历赋值】对象这里特殊处理了，不遍历拷贝原型链上的属性
+		// 				if (origin.hasOwnProperty(key)) {
+		// 					result[key] = deepCloneCycle(origin[key], hashMap); // 【递归】
+		// 				}
+		// 			}
+		// 		}
+		// 	} else { // 【类型判断】原始类型直接返回
+		// 		return origin;
+		// 	}
+		// 	return result;
+		// }
+	</script>
+</html>

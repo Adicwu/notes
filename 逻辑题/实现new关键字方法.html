@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+
+	</body>
+	<script type="text/javascript">
+		//手动创建_new()方法，实现new关键字的效果
+
+		function Dog(name) {
+			this.name = name
+		}
+		Dog.prototype.says = function() {
+			console.log('i am ' + this.name)
+		}
+		//明确new到底做了什么
+		// 1 形参赋值、变量提升
+		// 2 创建了一个空对象，让函数的this指向空对象，对象的原型指向函数
+		// 3 执行函数后，返回创建的对象
+		function _new(fn, ...arg) {
+			// 写法一
+			// let obj = {}
+			// obj.__proto__ = fn.prototype
+			
+			// 写法二
+			let obj = Object.create(fn.prototype)
+			
+			fn.call(obj, ...arg)
+			return obj
+		}
+
+		let obj = _new(Dog, 'bob');
+
+		// let obj  = new Dog('bob');
+		obj.says()
+		console.log(obj instanceof Dog)
+		
+		// 知识点小结
+		// 1.obj instanceof Dog 判断对象是否继承与指定类
+		// 2.Object.create(fn.prototype) 能在创建对象时,使其创建出的对象__proto__指向指定的函数prototype
+		// 3.明确new关键字做了什么，如上
+	</script>
+</html>

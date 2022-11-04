@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<div class="box-1"></div>
+			<div class="box-2">
+				<div class="son2"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 将 rgb 颜色字符串转换为十六进制的形式，如 rgb(255, 255, 255) 转为 #ffffff
+		// 1. rgb 中每个 , 后面的空格数量不固定
+		// 2. 十六进制表达式使用六位小写字母
+		// 3. 如果输入不符合 rgb 格式，返回原始输入
+		function rgb2hex(sRGB) {
+			const rgbRep = /^(rgb|RGB)\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)/;
+			const hex = str => str < 16 ? "0" + Number(str).toString(16) : Number(str).toString(16);
+			if (!rgbRep.test(sRGB)) return sRGB;
+			return sRGB.replace(rgbRep, (a, c, r, g, b) => {
+				console.log(r, g, b)
+				return "#" + hex(r) + hex(g) + hex(b);
+			})
+		}
+		let res = rgb2hex('rgb(255,255,255)');
+		console.log(res)
+	</script>
+</html>

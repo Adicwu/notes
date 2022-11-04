@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 获取 url 中的参数
+		// 1. 指定参数名称，返回该参数的值 或者 空字符串
+		// 2. 不指定参数名称，返回全部的参数对象 或者 {}
+		// 3. 如果存在多个同名参数，则返回数组
+		function getUrlParam(sUrl, sKey) {
+			sUrl = sUrl.split('#')[0].split('?')[1].split('&')
+			if (typeof sKey != 'undefined') {
+				let rel = sUrl.filter(item => item.includes(sKey))
+				if (rel.length === 1) {
+					return rel[0].replace(`${sKey}=`, '')
+				} else if (rel.length > 0) {
+					return rel.map(item => item.replace(`${sKey}=`, ''))
+				} else {
+					return '';
+				}
+			} else {
+				let rel = {}
+				sUrl.forEach(item => {
+					let res = item.split('=')
+					if (res[0] in rel) {
+						rel[res[0]].push(res[1])
+					} else {
+						rel[res[0]] = [res[1]]
+					}
+				})
+				return rel
+			}
+		}
+
+		const res = getUrlParam('http://www.nowcoder.com?key=1&key=2&key=3&test=4#hehe')
+		console.log(res)
+	</script>
+</html>

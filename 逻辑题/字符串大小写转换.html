@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		let str = 'AbC'
+
+		function strReverse(str) {
+			const strArr = str.split('')
+			const caseReverse = (str) => str.toUpperCase() === str ? str.toLowerCase() : str.toUpperCase();
+			return strArr.map(item => caseReverse(item)).join('')
+		}
+		console.log(strReverse(str))
+	</script>
+</html>

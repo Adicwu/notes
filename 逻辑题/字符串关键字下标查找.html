@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		let str = 'http://www.adicw.cn/ahome'
+
+		function findStrIndex(str, key) {
+			//循环遍历
+			let index = -1
+			for (let i = 0; i < str.length; i++) {
+				(key == str.substr(i, key.length)) && (index = i)
+			}
+			return index
+			
+			// 正则
+			// const reg = new RegExp(`${key}`)
+			// const res = str.match(reg)
+			// return res === null ? -1 : res.index
+			
+			//es6
+			// return str.indexOf(key)
+		}
+		console.log(findStrIndex(str, 'adicw'))
+	</script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<p></p>
+		<p></p>
+		<p></p>
+	</body>
+	<script>
+		var sortString = function(s) {
+			let rel = [];
+			let str_obj = [...s].map(item => item.charCodeAt()).sort((a, b) => a - b);
+			while (str_obj.length > 0) {
+				let min = {
+					index: 0,
+					val: str_obj.splice(0, 1)[0]
+				};
+				rel.push(min.val)
+				while (min.index < str_obj.length) {
+					if (str_obj[min.index] > min.val) {
+						min.val = str_obj.splice(min.index, 1)[0]
+						rel.push(min.val);
+					} else {
+						min.index++;
+					}
+				}
+				if (str_obj.length === 0) break;
+				let max = {
+					index: str_obj.length - 1,
+					val: str_obj.splice(str_obj.length - 1, 1)[0]
+				};
+				rel.push(max.val)
+				while (max.index > 0) {
+					if (str_obj[max.index] < max.val) {
+						max.val = str_obj.splice(max.index, 1)[0]
+						rel.push(max.val)
+					} else {
+						max.index--;
+					}
+				}
+			}
+			return rel.map(item => String.fromCharCode(item)).join('')
+		};
+		console.log(sortString('leetcode'))
+	</script>
+</html>

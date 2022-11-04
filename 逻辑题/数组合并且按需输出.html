@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+
+	</body>
+	<script type="text/javascript">
+		let arr1 = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2']
+		let arr2 = ['A', 'B', 'C', 'D']
+
+		// 合并上面数组,内容顺序如下
+		// ["A1", "A2", "A", "B1", "B2", "B", "C1", "C2", "C", "D1", "D2", "D"]
+
+		// 方法一 函数嵌套，有bug
+		// arr2 = arr2.map(item => item + '3')
+		// let rel = [...arr1, ...arr2]
+		// rel = rel.sort((a, b) => a.localeCompare(b)).map(item => item.replace('3', ''))
+		// console.log(rel)
+
+
+		// 方法二 遍历插入，无bug
+		var n = 0
+		arr2.forEach(item => {
+			for (let i = 0; i < arr1.length; i++) {
+				if (arr1[i].includes(item)) n = i
+			}
+			arr1.splice(n + 1, 0, item)
+		})
+		console.log(arr1)
+		
+		
+		// 知识点小结
+		// 1.arr.sort((a, b) => a.localeCompare(b)) 按照本地的字符规则将数组内容排序
+		// 2.基本字符串中,字母和数字大小按顺序递增
+	</script>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 将多维数组扁平化后 去重、升序排序
+		var arr = [
+			[1, 2, 3],
+			[3, 4, 5, 5],
+			[6, 7, 8, 9, [11, 12, [12, 13, [14]]]],
+			10
+		]
+		function test(arr) {
+			//方法一 循环遍历判断长度
+			// let new_arr = []
+			// arr.forEach(item => {
+			// 	item.length > 0 ? new_arr.push(...test(item)) : new_arr.push(item)
+			// })
+
+			//方法二 es6自带方法
+			// let new_arr = arr
+			// new_arr = new_arr.flat(Infinity)
+
+			//方法三 巧妙利用数据类型转换
+			let new_arr = arr
+			new_arr = new_arr.toString().split(',').map(item => Number(item))
+			
+			//最终排序去重
+			return Array.from(new Set(new_arr)).sort((a, b) => a - b)
+		}
+		console.log(test(arr))
+		
+		// 知识点小结
+		// 1.arr.toString()和JSON.stringify()可以将多维数组变成字符串,因为数组中不会存在[]
+		// 2.arr.flat(Infinity)可将数组降低为一维,无论其本身几维
+	</script>
+</html>

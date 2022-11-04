@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<div class="box-1"></div>
+			<div class="box-2">
+				<div class="son2"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 根据包名，在指定空间中创建对象
+		function namespace(oNamespace, sPackage) {
+			let res = oNamespace
+			sPackage.split('.').forEach(item => {
+				if (item in oNamespace) {
+					if (typeof oNamespace[item] !== 'object') {
+						oNamespace[item] = {}
+					}
+				} else {
+					oNamespace[item] = {}
+				}
+				oNamespace = oNamespace[item]
+			})
+			return res
+		}
+		namespace({
+			a: {
+				test: 1,
+				b: 2
+			}
+		}, 'a.b.c.d')
+		// {a: {test: 1, b: {c: {d: {}}}}}
+	</script>
+</html>

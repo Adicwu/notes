@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<style type="text/css">
+		</style>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//实现函数，在指定次数内每隔指定秒数执行指定方法
+
+		async function handle(fn, wait, times) {
+			while (times > 0) {
+				await new Promise(resolve => setTimeout(resolve, wait));
+				fn();
+				times--;
+			}
+		}
+
+		handle(() => {
+			console.log('？')
+		}, 1000, 3)
+
+		//1.使用promise创建等待间隔
+	</script>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+
+	</body>
+	<script type="text/javascript">
+		//使用递归将传入整数翻转。且只能传入一个参数
+		function numReverse(num) {
+			let lastNum = num % 10
+			elseNum = parseInt(num / 10)
+			return elseNum < 1 ? num : `${lastNum}${numReverse(elseNum)}`
+		}
+		console.log(numReverse(12345))
+		
+		// 1.整数%10相当于获取最后一位值
+		// 2.递归就是函数内调用自己，且要有跳出条件
+		// 3.反撇号内可以执行函数
+	</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<div class="box-1"></div>
+			<div class="box-2">
+				<div class="son2"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 数组去重 偏原生
+		Array.prototype.uniq = function() {
+			// let res = [];
+			// let hasNaN = false;
+			// this.forEach((item, index) => {
+			// 	let key = res.indexOf(item) === -1
+			// 	if (item !== item) {
+			// 		if (!hasNaN) {
+			// 			res.push(item);
+			// 			hasNaN = true
+			// 		}
+			// 	} else {
+			// 		key && res.push(item);
+			// 	}
+			// })
+			// return res
+			const map = new Map()
+			return this.reduce((totol, item) => {
+				if (!map.has(item)) {
+					map.set(item, 1)
+					return [...totol, item]
+				}
+
+				return totol
+			}, [])
+		}
+		let res = [false, true, NaN, undefined, null, NaN, 0, 1, {}, {}, 'a', 'a', NaN].uniq()
+		console.log(res)
+
+	</script>
+</html>

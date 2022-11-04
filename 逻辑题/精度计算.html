@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		function multiply(a, b) {
+			const spliter = num => num.toString().split('.')[1] || ''
+			let len = spliter(a).length + spliter(b).length;
+			return (a * b).toFixed(len)
+		}
+		console.log(multiply(3, 0.0001))
+	</script>
+</html>

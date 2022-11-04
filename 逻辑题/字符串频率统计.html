@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+
+	</body>
+	<script type="text/javascript">
+		// 统计字符串中每个字符的出现频率，返回一个 Object，key 为统计字符，value 为出现频率
+		// 1. 不限制 key 的顺序
+		// 2. 输入的字符串参数不会为空
+		// 3. 忽略空白字符
+		function count(str) {
+			str = str.replace(/ /g, '');
+			let rel = {};
+			[...str].forEach(item => {
+				item in rel ? rel[item]++ : (rel[item] = 1)
+			})
+			return rel;
+		}
+		console.log(count('hello world'))
+	</script>
+</html>

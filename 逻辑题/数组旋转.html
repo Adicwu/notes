@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+
+	</body>
+	<script type="text/javascript">
+		// 数组旋转,给定一个数组，将其所有元素向右移动k个位置
+		let arr = [1, 2, 3, 4, 5, 6, 7]
+		// 假设k = 3， 输出[5, 6, 7, 1, 2, 3, 4]
+
+		Array.prototype.rotate = function(size) {
+			var arr = this
+			var len = arr.length
+			if (size == len || size <= 0) return arr
+			if (size > len) size = size % len
+
+			// 方法一 将取出的两节合并
+			// return arr.slice(-size).concat(arr.slice(0, len - size))
+
+			// 方法二 在原数组操作
+			return arr.splice(-size).concat(arr)
+		}
+		console.log(arr.rotate(3))
+	</script>
+</html>

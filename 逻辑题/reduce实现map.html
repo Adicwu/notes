@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<style type="text/css">
+		</style>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//reduce的基础上实现map函数
+		let arr = ['js', 'vue', 'php', 'h5']
+
+		function _map(arr, fn) {
+			return arr.reduce((total, cur, i, arr) => {
+				total.push(fn(cur, i))
+				return total
+			}, [])
+		}
+		let new_arr = _map(arr, function(item, index) {
+			return item + '-ll'
+		})
+		
+		console.log(new_arr)
+	</script>
+</html>

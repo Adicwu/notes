@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<button type="button">dp</button>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 防抖
+		 * @param {Object} fn 执行函数
+		 * @param {Object} delay 执行等待时间
+		 * @param {Object} immediate 是否一开始执行
+		 */
+		function debounce(fn, delay, immediate) {
+			let timer;
+			const cb = function() {
+				const ctx = this
+				timer && clearTimeout(timer)
+				if (immediate) {
+					const isEnter = !timer
+					timer = setTimeout(() => {
+						timer = null
+					}, delay);
+					isEnter && fn.apply(ctx, arguments)
+				} else {
+					timer = setTimeout(() => {
+						fn.apply(ctx, arguments)
+					}, delay)
+				}
+			}
+			return cb
+		}
+
+		function thorttle(func, wait, options = {
+			leading: true,
+			trailing: true
+		}) {
+			let timeout, context, args, result;
+			let previous = 0;
+
+			let later = function() {
+				previous = !options.leading ? 0 : new Date().getTime();
+				timeout = null;
+				func.apply(context, args);
+				if (!timeout) context = args = null;
+			};
+
+			let throttled = function() {
+				const now = new Date().getTime();
+				if (!previous && !options.leading) previous = now;
+				const remaining = wait - (now - previous);
+				context = this;
+				args = arguments;
+				if (remaining <= 0 || remaining > wait) {
+					if (timeout) {
+						clearTimeout(timeout);
+						timeout = null;
+					}
+					previous = now;
+					func.apply(context, args);
+					if (!timeout) context = args = null;
+				} else if (!timeout && options.trailing) {
+					timeout = setTimeout(later, remaining);
+				}
+			};
+
+			throttled.cancel = function() {
+				clearTimeout(timeout);
+				previous = 0;
+				timeout = null;
+			}
+			return throttled;
+		}
+
+		document.querySelector('button').addEventListener('click', thorttle((e) => {
+			console.log('ok', e)
+		}, 1000))
+	</script>
+</html>

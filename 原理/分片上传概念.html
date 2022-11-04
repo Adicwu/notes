@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="file" id="test" value="" />
+	</body>
+	<script type="text/javascript">
+		function axios(form) {
+			return new Promise((resolve) => {
+				setTimeout(() => {
+					console.log(form)
+					resolve()
+				}, Math.random() * 10000)
+			})
+		}
+		
+		/**
+		 * 简易分片上传
+		 * ps：断点续传何其类似，但需要知道有什么文件已上传
+		 */
+		class PartialUpload {
+			constructor(splitSize = 2) {
+				this.splitSize = splitSize * 1024 * 1024 // 相当于2M
+				this.splitBlock = []
+			}
+			upload(file, request) {
+				let splitedSize = 0
+				return new Promise((resolve, reject) => {
+					if (!file) reject('empty file')
+					console.log('file', file)
+					while (splitedSize < file.size) {
+						this.splitBlock.push(file.slice(splitedSize, splitedSize + this.splitSize))
+						splitedSize += this.splitSize
+					}
+					Promise.all(this.splitBlock.map(request)).then(()=>resolve())
+					// resolve(this.splitBlock)
+				})
+			}
+			clear() {
+				this.splitBlock.splice()
+			}
+		}
+
+		document.getElementById('test').addEventListener('change', e => {
+			const uploader = new PartialUpload(1024)
+			const file = e.target.files[0]
+			uploader.upload(file, async (item, index) => {
+				const form = new FormData()
+				form.append(file.name, item)
+				form.append('index', index)
+				return axios(form)
+			}).then(res => {
+				console.log(res)
+				// 合并请求....
+			}).catch(e => {
+				console.log(e)
+			})
+		})
+	</script>
+</html>

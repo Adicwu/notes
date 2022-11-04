@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" v-model="input1">
+		<input type="text" class="11box2" v-model="input">
+		<input type="text" class="box" v-model="input1">
+		<input type="text" class="boxcontent" v-model="input1">
+		<h1 v-model="input1" class="box content"></h1>
+		<div>
+			<input type="text" class="box" v-model="input1">
+		</div>
+		<div>
+			<div>
+				<input type="text" class="box" v-model="input1">
+				<input type="text" v-model="input2">
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 标签属性筛选器，筛选出指定标签属性的指定值的标签
+		function $attr(name, val) {
+			// 方法一 循环遍历判断
+			let els = document.getElementsByTagName('*')
+			let rel = []
+			els = Array.from(els)
+			els.forEach(item => {
+				let keys = item.getAttribute(name)
+				
+				// 方法一.1 使用字符串拆分数组来处理判断一个标签属性内多个内容
+				// keys != null ? keys = keys.split(' ') : keys = []
+				// keys.forEach(key => {
+				// 	if (key == val) {
+				// 		rel.push(item);
+				// 	}
+				// })
+					
+				// 方法二.1 使用正则判断关键字左右是否为空格判断一个标签属性内多个内容	
+				if(new RegExp(`\\b${val}\\b`).test(keys)){
+					rel.push(item);
+				}
+			})
+			return rel
+			
+			// 方法二 原生查询，无法处理一个标签属性内多个内容
+			// let domlist = document.querySelectorAll(`[${name}="${val}"]`)
+			// return Array.from(domlist)
+		}
+		console.log($attr('class', 'box'))
+		
+		// 知识点小结
+		// 1.document.getElementsByTagName('*')可以选择所有节点元素
+		// 2.选择器选择的节点组通常为对象或者说类数组
+		// 3.Array.from(obj)可以将类数组转换为数组
+		// 4.document.querySelectorAll(`[${name}="${val}"]`)可以选择指定属性名称为name值为val的节点
+	</script>
+</html>

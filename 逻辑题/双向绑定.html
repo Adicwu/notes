@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" v-model="else">
+		<input type="text" v-model="title">
+		<input type="text" v-model="title">
+		<h3 v-text="title"></h3>
+		<h3 v-text="else"></h3>
+	</body>
+	<script type="text/javascript">
+		// "use strict"
+		function View() {
+			const proxy = new Proxy({}, {
+				set(target, key, val) {
+					let cates = ['v-model', 'v-text']
+					cates.forEach(item => {
+						let domlist = document.querySelectorAll(`[${item}="${key}"]`)
+						if (item == 'v-model') domlist.forEach(item => item.value = val)
+						if (item == 'v-text') domlist.forEach(item => item.innerText = val)
+					})
+				},
+			})
+			this.init = function() {
+				const domlist = document.querySelectorAll('[v-model]')
+				domlist.forEach(item => {
+					item.addEventListener('keyup', function() {
+						proxy[this.getAttribute('v-model')] = this.value
+					})
+				})
+			}
+		}
+		new View().init()
+	</script>
+</html>
